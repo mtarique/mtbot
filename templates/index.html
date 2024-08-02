@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTBot Interface</title>
+    <script>
+        function getBotResponse() {
+            var userText = document.getElementById("userInput").value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/get?msg=" + encodeURIComponent(userText), true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById("botResponse").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <h1>MTBot Interface</h1>
+    <input type="text" id="userInput" placeholder="Type your message here">
+    <button onclick="getBotResponse()">Send</button>
+    <p>Bot Response: <span id="botResponse"></span></p>
+</body>
+</html>
